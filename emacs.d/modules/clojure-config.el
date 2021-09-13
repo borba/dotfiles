@@ -27,6 +27,8 @@
 														".cpcache"
 														".idea"
 														".lsp"
+														"elpa"
+														"auto-save-list"
 														".vscode"))
 
 (setq projectile-indexing-method 'native)

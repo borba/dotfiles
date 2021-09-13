@@ -14,3 +14,4 @@ elpa
 auto-save-list
 projectile-bookmarks.eld
 .lsp-session*
+*.cache
