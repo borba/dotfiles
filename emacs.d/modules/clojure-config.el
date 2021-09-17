@@ -15,44 +15,6 @@
               ("C-c p" . projectile-command-map))
 	:commands (projectile-global-mode))
 
-(use-package helm-projectile
-  :config
-  (helm-projectile-on)
-  (setq projectile-completion-system 'helm))
-
-;; Diretories to be ignored
-
-(setq ignored-directories '(".calva"
-														".clj-kondo"
-														".cpcache"
-														".idea"
-														".lsp"
-														"elpa"
-														"auto-save-list"
-														".vscode"))
-
-(setq projectile-indexing-method 'native)
-
-(dolist (directory ignored-directories)
-	(add-to-list 'projectile-globally-ignored-directories directory))
-
-;; Positioning the navigation window in bottom of the frame
-
-(defvar helm-display-help-buffer-regexp '("\\*.*Helm.*Help.*\\*"))
-(defvar helm-display-buffer-regexp `("\\*.*helm.*\\*"
-                                     (display-buffer-in-side-window)
-                                     (inhibit-same-window . nil)
-                                     (side . bottom)
-                                     (window-width . 0.6)
-                                     (window-height . 0.4)))
-
-(defun display-helm-at-bottom (buffer &optional _resume)
-  (let ((display-buffer-alist (list helm-display-help-buffer-regexp
-                                    helm-display-buffer-regexp)))
-    (display-buffer buffer)))
-
-(setq helm-display-function 'display-helm-at-bottom)
-
 ;; lsp-mode
 
 (use-package lsp-mode
@@ -86,6 +48,9 @@
 (use-package clojure-mode
 	:mode (("\\.clj\\'" . clojure-mode)
          ("\\.edn\\'" . clojure-mode)))
+
+(use-package paredit
+  :hook (clojure-mode . paredit-mode))
 
 (use-package rainbow-delimiters
 	:config

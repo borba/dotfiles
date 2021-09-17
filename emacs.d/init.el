@@ -1,10 +1,14 @@
 (require 'package)
 
+;; or (serq package-archives (("melpa" . "http...") ("org"...))
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+(add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
+(add-to-list 'package-archives '("elpa" . "https://elpa.gnu.org/packages/") t)
 
 (setq package-enable-at-startup nil)
 (package-initialize)
 
+;; (unless (package-installed-p 'use-package...
 (when (not (require 'use-package nil 'noerror))
   (message "Package 'use-package' not found. Updating package list and installing it.")
   (package-refresh-contents)
@@ -35,6 +39,7 @@
 (add-to-load-path "~/.emacs.d/modules")
 
 (require 'gui-config)
+(require 'emacs-config)
 (require 'editing-config)
 (require 'clojure-config)
 
