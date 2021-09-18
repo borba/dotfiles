@@ -16,7 +16,7 @@
 
 ;; Set defaults for use-package
 (setq-default use-package-always-defer t
-							use-package-always-ensure t)
+              use-package-always-ensure t)
 
 ;; Helper functions
 
@@ -32,14 +32,13 @@
 ;; Deal with an intermitent error loading theme
 (when noninteractive
   (after! undo-tree
-					(global-undo-tree-mode -1)))
+          (global-undo-tree-mode -1)))
 
 ;; Packages paths
-  
+
 (add-to-load-path "~/.emacs.d/modules")
 
 (require 'gui-config)
 (require 'emacs-config)
 (require 'editing-config)
 (require 'clojure-config)
-
