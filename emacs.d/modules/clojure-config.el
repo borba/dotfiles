@@ -4,18 +4,6 @@
 
 (setq gc-cons-threshold (* 100 1024 1024))
 
-;; Projectile
-(use-package projectile
-  :init     (projectile-mode +1)
-  :config   (setq projectile-project-search-path '("~/projects/"
-                                                 "~/nubank/")
-                  projectile-enable-caching nil
-                  frame-title-format (setq icon-title-format '((:eval (projectile-project-name)))))
-  :bind     (:map projectile-mode-map
-                  ("s-p" . projectile-command-map)
-                  ("C-c p" . projectile-command-map))
-  :commands (projectile-global-mode))
-
 ;; lsp-mode
 
 (use-package yasnippet)
@@ -48,18 +36,20 @@
          ("\\.edn\\'" . clojure-mode)))
 
 (use-package paredit
-  :diminish
   :config (show-paren-mode t)
-  :bind (("<C-M-right>" . paredit-forward-slurp-sexp)
-         ("<C-M-left>" . paredit-forward-barf-sexp))
-  :hook (clojure-mode emacs-lisp-mode))
-
+  :bind   (("<C-M-right>" . paredit-forward-slurp-sexp)
+           ("<C-M-left>" . paredit-forward-barf-sexp))
+  :hook   ((clojure-mode . paredit-mode)
+           (emacs-lisp-mode . paredit-mode)))
 
 (use-package rainbow-delimiters
-  :hook (clojure-mode))
+  :hook ((clojure-mode . rainbow-delimiters-mode)
+         (emacs-lisp-mode . rainbow-delimiters-mode)))
 
 (use-package smartparens
-  :config (require 'smartparens-config)
-  :hook   (clojure-mode-hook #'smartparens-mode))
+  :config   (setq sp-show-pair-from-inside nil)
+            (require 'smartparens-config)
+  :hook     (clojure-mode emacs-list-mode)
+  :diminish smartparens-mode)
 
 (provide 'clojure-config)
