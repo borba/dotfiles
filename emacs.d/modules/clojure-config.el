@@ -13,17 +13,24 @@
   :config   (setq lsp-lens-enable t
                   lsp-signature-auto-activate nil
                   lsp-clojure-custom-server-command "/usr/local/bin/clojure-lsp")
-  :hook     (clojure-mode
-             clojure-script-mode
-             clojurec-mode)
+  :hook     ((clojure-mode . lsp)
+             (clojure-script-mode . lsp)
+             (clojurec-mode .lsp))
   :commands lsp)
+
+(use-package lsp-ivy
+  :commands lsp-ivy-workspace-symbol)
+
+(use-package lsp-ui
+  :commands lsp-ui-mode)
 
 (use-package lsp-treemacs
   :config   (setq treemacs-space-between-root-nodes nil
                   lsp-treemacs-error-list-current-project-only t)
   :commands lsp-treemacs-errors-list)
 
-(use-package flycheck)
+(use-package flycheck
+  :pin "melpa")
 
 (use-package company
   :config (setq company-idle-delay 0.0

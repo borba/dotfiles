@@ -7,10 +7,10 @@
 
 ;; or (setq package-archives (("melpa" . "http...") ("org"...))
 (setq package-archives nil)
-;;(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 ;;(add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
 (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/") t)
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 
 (setq package-enable-at-startup nil)
 (package-initialize)
@@ -29,7 +29,8 @@
 
 ;; Set defaults for use-package
 (setq-default use-package-always-defer t
-              use-package-always-ensure t)
+              use-package-always-ensure t
+              use-package-always-pin "melpa-stable")
 
 (use-package auto-package-update
   :config ((setq auto-package-update-delete-old-versions t
