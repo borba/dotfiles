@@ -1,8 +1,8 @@
 (require 'use-package)
 
 ;; Set theme
-(use-package shades-of-purple-theme
-  :init (load-theme 'shades-of-purple t))
+(use-package zenburn-theme
+  :init (load-theme 'zenburn t))
 
 ;; Leave frame clean
 (setq-default inhibit-startup-screen t)
@@ -11,10 +11,13 @@
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
+;;(set-fringe-mode 10)
+;;(blink-cursor-mode -1)
 
 ;; Initial frame size
 (add-to-list 'default-frame-alist '(height . 48))
 (add-to-list 'default-frame-alist '(width . 160))
+;;(toggle-fram-maximized)
 
 ;; Have both line and column numbers in mode line
 (line-number-mode 1)

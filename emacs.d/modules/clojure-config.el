@@ -46,10 +46,10 @@
   :hook ((clojure-mode . rainbow-delimiters-mode)
          (emacs-lisp-mode . rainbow-delimiters-mode)))
 
-(use-package smartparens
-  :config   (setq sp-show-pair-from-inside nil)
-            (require 'smartparens-config)
-  :hook     (clojure-mode emacs-list-mode)
-  :diminish smartparens-mode)
+;; (use-package smartparens
+;;   :config   (setq sp-show-pair-from-inside nil)
+;;             (require 'smartparens-config)
+;;   :hook     (clojure-mode emacs-list-mode)
+;;   :diminish smartparens-mode)
 
 (provide 'clojure-config)
