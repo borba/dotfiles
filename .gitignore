@@ -16,4 +16,3 @@ projectile-bookmarks.eld
 .lsp-session*
 *.cache
 
-nvim/lua/
