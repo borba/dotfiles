@@ -17,7 +17,7 @@ return {
     return require('packer').startup(function(use)
       use 'wbthomason/packer.nvim'
 
-      for i, module in ipairs(modules) do
+      for _i, module in ipairs(modules) do
         require(module).plugins(use)
       end
 
@@ -25,5 +25,12 @@ return {
         require('packer').sync()
       end
     end)
+  end,
+
+  setup = function(modules)
+    for _i, module in ipairs(modules) do
+      require(module).setup()
+    end
+    return true
   end
 }

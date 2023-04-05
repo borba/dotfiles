@@ -1,6 +1,14 @@
-local common = require("common")
+require("options")
+local c = require("common")
+
+-- you should add the modules to be loaded here
+
+local modules_to_load = {"telescope"}
+
+-- modules loading
+
 local modules_loader = require("modules_loader")
+local modules = c.map(c.prepend("modules"), modules_to_load)
 
-local modules = {"telescope"}
-
-modules_loader.load(common.map(common.prepend("modules"), modules))
+modules_loader.load(modules)
+modules_loader.setup(modules)
