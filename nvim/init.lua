@@ -3,7 +3,7 @@ local c = require("common")
 
 -- you should add the modules to be loaded here
 
-local modules_to_load = {"telescope"}
+local modules_to_load = {"telescope", "theme"}
 
 -- modules loading
 
