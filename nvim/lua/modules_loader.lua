@@ -14,10 +14,10 @@ local packer_bootstrap = ensure_packer()
 
 return {
   load = function(modules)
-    require('packer').startup(function(use)
+    return require('packer').startup(function(use)
       use 'wbthomason/packer.nvim'
 
-      for module in modules do
+      for i, module in ipairs(modules) do
         require(module).plugins(use)
       end
 
