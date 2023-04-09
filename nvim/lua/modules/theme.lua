@@ -17,5 +17,12 @@ return {
     }
   end,
 
-  setup = setup
+  setup = setup,
+
+  lazy = {
+    'folke/tokyonight.nvim',
+    lazy = false,
+    priority = 1000,
+    config = setup
+  }
 }

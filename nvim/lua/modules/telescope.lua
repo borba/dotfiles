@@ -15,5 +15,11 @@ return {
     }
   end,
 
-  setup = setup
+  setup = setup,
+
+  lazy = {
+    'nvim-telescope/telescope.nvim',
+    dependencies = {'nvim-lua/plenary.nvim'},
+    config = setup
+  }
 }
