@@ -1,4 +1,4 @@
-function setup()
+function setup_tokyo()
   require('tokyonight').setup {
     style = 'storm'
   }
@@ -6,11 +6,27 @@ function setup()
   vim.cmd[[colorscheme tokyonight]]
 end
 
-return {
-  'folke/tokyonight.nvim',
-  lazy = false,
-  priority = 1000,
-  config = setup,
+function setup_line()
+  require('lualine').setup {
+    options = {
+      theme = 'onelight'
+    },
+    sections = {
+      lualine_b = {'branch', 'diagnostics'}
+    }
+  }
+end
 
-  'itchyny/lightline.vim'
+return {
+  {
+    'folke/tokyonight.nvim',
+    lazy = false,
+    priority = 1000,
+    config = setup_tokyo
+  },
+  {
+    'nvim-lualine/lualine.nvim',
+    dependencies = {'nvim-tree/nvim-web-devicons'},
+    config = setup_line
+  }
 }
