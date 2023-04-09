@@ -10,19 +10,8 @@ function setup()
 end
 
 return {
-  plugins = function(use)
-    use {
-      'folke/tokyonight.nvim',
-      config = setup
-    }
-  end,
-
-  setup = setup,
-
-  lazy = {
-    'folke/tokyonight.nvim',
-    lazy = false,
-    priority = 1000,
-    config = setup
-  }
+  'folke/tokyonight.nvim',
+  lazy = false,
+  priority = 1000,
+  config = setup
 }

@@ -7,9 +7,7 @@ local modules_to_load = {"telescope", "theme"}
 
 -- modules loading
 
---local modules_loader = require("modules_loader")
-local modules_loader = require("lazy_loader")
+local modules_loader = require("modules_loader")
 local modules = c.map(c.prepend("modules"), modules_to_load)
 
 modules_loader.load(modules)
---modules_loader.setup(modules)

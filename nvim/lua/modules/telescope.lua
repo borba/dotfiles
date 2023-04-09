@@ -7,19 +7,7 @@ function setup()
 end
 
 return {
-  plugins = function(use)
-    use {
-      'nvim-telescope/telescope.nvim',
-      requires = {'nvim-lua/plenary.nvim'},
-      config = setup
-    }
-  end,
-
-  setup = setup,
-
-  lazy = {
-    'nvim-telescope/telescope.nvim',
-    dependencies = {'nvim-lua/plenary.nvim'},
-    config = setup
-  }
+  'nvim-telescope/telescope.nvim',
+  dependencies = {'nvim-lua/plenary.nvim'},
+  config = setup
 }
