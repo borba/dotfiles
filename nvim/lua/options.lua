@@ -1,5 +1,6 @@
 local opt = vim.opt
 
+
 -- ui
 
 opt.showmode = true
@@ -13,6 +14,11 @@ opt.ruler = false
 opt.mouse = "a"
 
 opt.clipboard = "unnamedplus"
+
+opt.signcolumn = "number"
+
+opt.splitbelow = true
+opt.splitright = true
 
 -- indenting
 

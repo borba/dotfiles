@@ -1,6 +1,10 @@
 function setup_tokyo()
   require('tokyonight').setup {
-    style = 'storm'
+    style = 'storm',
+    on_highlights = function(highlights, colors)
+      highlights.LineNr.fg = '#338ba8'
+      highlights.CursorLineNr.fg = '#add8e6'
+    end
   }
 
   vim.cmd[[colorscheme tokyonight]]
