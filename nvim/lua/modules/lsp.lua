@@ -17,25 +17,21 @@ local function setup_mason_lspconfig()
 end
 
 local function setup_lspconfig()
-  require('lspconfig').lua_ls.setup {
-    settings = {
-      Lua = {
-        runtime = {
-          version = 'LuaJIT'
-        },
-        diagnostics = {
-          globals = {'vim'}
-        },
-        workspace = {
-          library = vim.api.nvim_get_runtime_file("", true),
-          checkThirdParty = false
-        },
-        telemetry = {
-          enable = false
-        }
-      }
-    }
-  }
+  local lang_dir = vim.fn.stdpath('config') .. '/lua/modules/lang'
+  local handle = vim.loop.fs_scandir(lang_dir)
+
+  while handle do
+    local filename, filetype = vim.loop.fs_scandir_next(handle)
+    if not filename then
+      break
+    end
+    if filetype == 'file' then
+      local found, module = pcall(require, ('modules.lang.' .. string.sub(filename, 1, -5)))
+      if found and module.setup_lsp then
+        module.setup_lsp()
+      end
+    end
+  end
 end
 
 return {
