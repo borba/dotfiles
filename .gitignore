@@ -16,3 +16,4 @@ projectile-bookmarks.eld
 .lsp-session*
 *.cache
 lazy-lock.json
+package-lock.json
