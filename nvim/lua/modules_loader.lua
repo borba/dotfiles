@@ -13,7 +13,7 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
-function append_config(c, m)
+local function append_config(c, m)
   table.insert(c, require(m))
   return c
 end

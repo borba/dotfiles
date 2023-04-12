@@ -1,7 +1,7 @@
-function setup_tokyo()
+local function setup_tokyo()
   require('tokyonight').setup {
     style = 'storm',
-    on_highlights = function(highlights, colors)
+    on_highlights = function(highlights, _)
       highlights.LineNr.fg = '#338ba8'
       highlights.CursorLineNr.fg = '#add8e6'
     end
@@ -10,7 +10,7 @@ function setup_tokyo()
   vim.cmd[[colorscheme tokyonight]]
 end
 
-function setup_line()
+local function setup_line()
   require('lualine').setup {
     options = {
       theme = 'onelight'
