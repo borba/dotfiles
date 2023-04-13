@@ -18,20 +18,12 @@ end
 
 local function setup_langs()
   local lang_dir = vim.fn.stdpath('config') .. '/lua/modules/lang'
-  local handle = vim.loop.fs_scandir(lang_dir)
 
-  while handle do
-    local filename, filetype = vim.loop.fs_scandir_next(handle)
-    if not filename then
-      break
+  require('common').require_all(lang_dir, 'modules.lang.', function(lang)
+    if lang.setup_lsp then
+      lang.setup_lsp()
     end
-    if filetype == 'file' then
-      local found, module = pcall(require, ('modules.lang.' .. string.sub(filename, 1, -5)))
-      if found and module.setup_lsp then
-        module.setup_lsp()
-      end
-    end
-  end
+  end)
 end
 
 local function setup_keybindings()
