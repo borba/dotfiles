@@ -1,5 +1,5 @@
 local function setup_lspconfig()
-  require('lspconfig').lua_ls.setup {
+  require('lspconfig').lua_ls.setup({
     settings = {
       Lua = {
         runtime = {
@@ -17,7 +17,9 @@ local function setup_lspconfig()
         }
       }
     }
-  }
+  })
+
+  require('coq').lsp_ensure_capabilities({})
 end
 
 return {

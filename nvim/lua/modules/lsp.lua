@@ -1,3 +1,7 @@
+vim.g.coq_settings = {
+  auto_start = 'shut-up'
+}
+
 local function setup_mason()
   require('mason').setup()
 end
@@ -83,7 +87,7 @@ return {
   },
   {
     'neovim/nvim-lspconfig',
-    dependencies = {'williamboman/mason-lspconfig.nvim'},
+    dependencies = {'williamboman/mason-lspconfig.nvim', 'ms-jpq/coq_nvim', 'ms-jpq/coq.artifacts', 'ms-jpq/coq.thirdparty'},
     config = setup_lspconfig
   }
 }
