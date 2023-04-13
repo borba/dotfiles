@@ -16,7 +16,7 @@ local function setup_mason_lspconfig()
   }
 end
 
-local function setup_lspconfig()
+local function setup_langs()
   local lang_dir = vim.fn.stdpath('config') .. '/lua/modules/lang'
   local handle = vim.loop.fs_scandir(lang_dir)
 
@@ -32,6 +32,10 @@ local function setup_lspconfig()
       end
     end
   end
+end
+
+local function setup_lspconfig()
+  setup_langs()
 end
 
 return {

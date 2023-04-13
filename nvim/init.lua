@@ -4,6 +4,7 @@ local c = require("common")
 -- you should add the modules to be loaded here
 
 local modules_to_load = {
+  'editing',
   'telescope',
   'theme',
   'syntax_highlight',
