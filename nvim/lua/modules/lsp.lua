@@ -73,6 +73,8 @@ end
 local function setup_lspconfig()
   setup_langs()
   setup_keybindings()
+
+  require('coq').lsp_ensure_capabilities({})
 end
 
 return {

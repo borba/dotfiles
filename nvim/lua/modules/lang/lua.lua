@@ -18,8 +18,6 @@ local function setup_lspconfig()
       }
     }
   })
-
-  require('coq').lsp_ensure_capabilities({})
 end
 
 return {
