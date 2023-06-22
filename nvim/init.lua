@@ -8,8 +8,7 @@ local modules_to_load = {
   'telescope',
   'theme',
   'syntax_highlight',
-  'lsp',
-  'whichkey'
+  'lsp'
 }
 
 -- modules loading
