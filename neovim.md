@@ -65,21 +65,21 @@
 
 ### concepts
 
-`i` - inner
-`w` - word
-`d` - delete
-`c` - change
-`b` - previous word
-`y` - yank (copy)
-`p` - print (paste)
-`f` - find
+`i` - inner  
+`w` - word  
+`d` - delete  
+`c` - change  
+`b` - previous word  
+`y` - yank (copy)  
+`p` - print (paste)  
+`f` - find  
 
 ### commands
 
-`set number` - show line numbers
-`set relativenumber` - show line relative numbers
-`coloscheme <scheme>` - sets color scheme (use TAB to list options)
-`<n>` - jump to the <n> line
-`%s/<word>/<replacement>/g` - replace <word> by <replacement> in all file
-`s/<word>/<replacement>/g` - replace <word> by <replacement> in current selection
-`reg` - list current registers
+`set number` - show line numbers  
+`set relativenumber` - show line relative numbers  
+`coloscheme <scheme>` - sets color scheme (use TAB to list options)  
+`<n>` - jump to the <n> line  
+`%s/<word>/<replacement>/g` - replace <word> by <replacement> in all file  
+`s/<word>/<replacement>/g` - replace <word> by <replacement> in current selection  
+`reg` - list current registers  
