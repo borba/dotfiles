@@ -3,7 +3,9 @@
 ### keybindings
 
 `i` - toggle to insert mode
+
 `ESC` - toggle to normal mode
+
 `a` - toggle to insert mode appending
 `o` - toggle to insert mode creating a new line
 `I` - toggle to insert mode in the beggining of line
