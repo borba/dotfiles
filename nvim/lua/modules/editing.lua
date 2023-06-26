@@ -15,6 +15,8 @@ opt.smartcase = true
 return {
   'cappyzawa/trim.nvim',
   config = function()
-    require("trim").setup {}
+    require("trim").setup {
+      ft_blocklist = {"markdown"}
+    }
   end
 }
