@@ -8,6 +8,7 @@ local modules_to_load = {
   'telescope',
   'theme',
   'syntax_highlight',
+  'completion',
   'lsp',
   'clojure'
 }
