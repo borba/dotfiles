@@ -10,7 +10,8 @@
 `A` - toggle to insert mode in the end of line  
 `O` - toggle to insert mode create a new line above current line  
 `x` - delete current character  
-`dd` - delete line  
+`dd` - delete line
+`dw` - delete word
 `<number><key>` - execute command <key> <number> of times (e.g. 10dd will delete 10 lines)  
 `$` - go to the end of line  
 `u` - undo  
