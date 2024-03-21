@@ -5,6 +5,7 @@ return {
 		--
 		-- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
 		"folke/tokyonight.nvim", -- You can easily change to a different colorscheme.
+		lazy = false,
 		priority = 1000, -- Make sure to load this before all the other start plugins.
 		init = function()
 			-- Load the colorscheme here.
@@ -15,8 +16,30 @@ return {
 			-- You can configure highlights by doing something like:
 			vim.cmd.hi("Comment gui=none")
 		end,
+		config = function()
+			require("tokyonight").setup({
+				style = "storm",
+				on_highlights = function(highlights, _)
+					highlights.LineNr.fg = "#338ba8"
+					highlights.CursorLineNr.fg = "#add8e6"
+				end,
+			})
+		end,
 	},
-
+	{
+		"nvim-lualine/lualine.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		config = function()
+			require("lualine").setup({
+				options = {
+					theme = "onelight",
+				},
+				sections = {
+					lualine_b = { "branch", "diagnostics" },
+				},
+			})
+		end,
+	},
 	{
 		"folke/todo-comments.nvim", -- Highlight todo, notes, etc in comments
 		event = "VimEnter",
