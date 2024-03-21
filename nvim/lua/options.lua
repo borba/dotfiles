@@ -1,25 +1,26 @@
-local opt = vim.opt
-
 -- ui
 
-opt.showmode = true
-opt.cursorline = true
+vim.opt.showmode = true
+vim.opt.cursorline = true
 
-opt.number = true
-opt.numberwidth = 4
-opt.relativenumber = true
-opt.ruler = false
+vim.opt.number = true
+vim.opt.numberwidth = 4
+vim.opt.relativenumber = true
+vim.opt.ruler = false
 
-opt.mouse = "a"
+vim.opt.mouse = "a"
 
-opt.clipboard = "unnamedplus"
+vim.opt.clipboard = "unnamedplus"
 
-opt.signcolumn = "number"
+vim.opt.signcolumn = "number"
 
-opt.splitbelow = true
-opt.splitright = true
+vim.opt.splitbelow = true
+vim.opt.splitright = true
 
 -- leader keys
 
-vim.api.nvim_set_var("mapleader", " ")
-vim.api.nvim_set_var("maplocalleader", ",")
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
+--vim.api.nvim_set_var("mapleader", " ")
+--vim.api.nvim_set_var("maplocalleader", ",")

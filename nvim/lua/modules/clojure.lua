@@ -16,5 +16,8 @@ return {
   },
   {
     'Olical/conjure'
+  },
+  {
+    'Olical/AnsiEsc'
   }
 }
