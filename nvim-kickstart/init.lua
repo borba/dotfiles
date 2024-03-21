@@ -11,7 +11,8 @@ local modules_to_load = {
 	"completion",
 	"theme",
 	"mini",
-	"treesitter",
+	"syntax_highlight",
+	"clojure",
 }
 
 local opts = {
