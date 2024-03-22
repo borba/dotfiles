@@ -13,6 +13,7 @@ local modules_to_load = {
 	"mini",
 	"syntax_highlight",
 	"clojure",
+	"project_tree",
 }
 
 local opts = {

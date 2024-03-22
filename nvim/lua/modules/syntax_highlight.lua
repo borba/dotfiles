@@ -5,6 +5,7 @@ return {
 		ensure_installed = {
 			"bash",
 			"clojure",
+			"fennel",
 			"gitignore",
 			"html",
 			"json",

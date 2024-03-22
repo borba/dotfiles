@@ -9,7 +9,7 @@ return {
 
 		-- Useful status updates for LSP.
 		-- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-		{ "j-hui/fidget.nvim", opts = {} },
+		--{ "j-hui/fidget.nvim", opts = {} },
 
 		-- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
 		-- used for completion, annotations and signatures of Neovim apis
@@ -91,6 +91,11 @@ return {
 				-- capabilities = {},
 				settings = {
 					Lua = {
+						runtime = { version = "LuaJIT" },
+						workspace = {
+							checkThirdParty = false,
+							library = vim.api.nvim_get_runtime_file("", true),
+						},
 						completion = {
 							callSnippet = "Replace",
 						},
@@ -101,7 +106,11 @@ return {
 			},
 			clojure_lsp = {
 				capabilities = require("cmp_nvim_lsp").default_capabilities(),
+				--before_init = function(params)
+				--	params.workDoneToken = "1"
+				--end,
 			},
+			fennel_language_server = {},
 		}
 
 		-- Ensure the servers and tools above are installed

@@ -28,14 +28,14 @@ return {
 	},
 	{
 		"nvim-lualine/lualine.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
+		dependencies = { "nvim-tree/nvim-web-devicons", "arkav/lualine-lsp-progress" },
 		config = function()
 			require("lualine").setup({
 				options = {
 					theme = "onelight",
 				},
 				sections = {
-					lualine_b = { "branch", "diagnostics" },
+					lualine_b = { "branch", "diagnostics", "lsp_progress" },
 				},
 			})
 		end,
