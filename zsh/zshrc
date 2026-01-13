@@ -15,21 +15,19 @@ bindkey "^[[B" history-beginning-search-forward-end
 
 ## Plugins
 export ZSH_PLUGIN_DIR="$ZSH/plugins"
-source $ZSH/plugin-mgm.sh
+source $ZSH/plugin-funcs.sh
 
 typeset -A PLUGINS
 PLUGINS[fast-syntax-highlighting]="git@github.com:zdharma-zmirror/fast-syntax-highlighting.git"
 PLUGINS[zsh-autosuggestions]="git@github.com:zsh-users/zsh-autosuggestions.git"
 PLUGINS[zsh-you-should-use]="git@github.com:MichaelAquilina/zsh-you-should-use.git"
-PLUGINS[zsh-bat]="https://github.com/fdellwing/zsh-bat.git"
 PLUGINS[zsh-completions]="git@github.com:zsh-users/zsh-completions.git"
 
 _plugins_load() {
-  source $ZSH/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-  source $ZSH/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-  source $ZSH/plugins/zsh-you-should-use/you-should-use.plugin.zsh
-  source $ZSH/plugins/zsh-bat/zsh-bat.plugin.zsh
-  fpath=($ZSH/plugins/zsh-completions/src $fpath)
+  source $ZSH_PLUGIN_DIR/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+  source $ZSH_PLUGIN_DIR/zsh-autosuggestions/zsh-autosuggestions.zsh
+  source $ZSH_PLUGIN_DIR/zsh-you-should-use/you-should-use.plugin.zsh
+  fpath=($ZSH_PLUGIN_DIR/zsh-completions/src $fpath)
 
   ## Autocompletion
   autoload -Uz +X compinit && compinit
@@ -38,21 +36,17 @@ _plugins_load() {
   zstyle ':completion:*' menu select
 }
 
-_plugins_load
+if [[ -f $ZSH_PLUGIN_DIR/INSTALLED ]]; then
+  _plugins_load
+fi
 
 export PATH="$PATH:/Applications/WezTerm.app/Contents/MacOS"
+
 eval "$(/opt/homebrew/bin/brew shellenv)"
-
-export PATH="$HOME/.jenv/bin:$PATH"
-eval "$(jenv init -)"
-
-export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
-
-eval "$(starship init zsh)"
-eval "$(zoxide init zsh --cmd cd)"
-source <(fzf --zsh)
-
-[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
+#eval "$(starship init zsh)"
+#eval "$(zoxide init zsh --cmd cd)"
+#source <(fzf --zsh)
+#eval "$(direnv hook zsh)"
 
 ## Aliases
 
@@ -86,7 +80,3 @@ alias gp="git push"
 alias gpf="git push --force"
 alias gst="git status"
 alias gss="git status -s"
-
-# direnv
-
-eval "$(direnv hook zsh)"

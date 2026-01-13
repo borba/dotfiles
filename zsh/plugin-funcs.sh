@@ -1,17 +1,3 @@
-#_plugins_load() {
-#  source $ZSH/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-#  source $ZSH/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-#  source $ZSH/plugins/zsh-you-should-use/you-should-use.plugin.zsh
-#  source $ZSH/plugins/zsh-bat/zsh-bat.plugin.zsh
-#  fpath=($ZSH/plugins/zsh-completions/src $fpath)
-
-  ## Autocompletion
-#  autoload -Uz +X compinit && compinit
-  ## case insensitive path-completion
-#  zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
-#  zstyle ':completion:*' menu select
-#}
-
 _plugins_foreach() {
   for key val in "${(@kv)PLUGINS}"; do
     "$1" "$key" "$val" "$ZSH_PLUGIN_DIR/$key"
@@ -51,10 +37,14 @@ plugins() {
   local cmd="$1"
   case "$cmd" in
     install)
+      rm $ZSH_PLUGIN_DIR/INSTALLED
       _plugins_foreach _plugin_install_one
+      touch $ZSH_PLUGIN_DIR/INSTALLED
       ;;
     sync)
+      rm $ZSH_PLUGIN_DIR/INSTALLED
       _plugins_foreach _plugin_update_one
+      touch $ZSH_PLUGIN_DIR/INSTALLED
       _plugins_load
       ;;
     list)
