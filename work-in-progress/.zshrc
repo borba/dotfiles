@@ -1,0 +1,92 @@
+export ZSH=~/.zsh
+
+export HISTFILE=$HOME/.zsh_history
+export HISTSIZE=10000
+export SAVEHIST=10000
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_FIND_NO_DUPS
+setopt SHARE_HISTORY
+
+autoload -U history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey "^[[A" history-beginning-search-backward-end
+bindkey "^[[B" history-beginning-search-forward-end 
+
+## Plugins
+export ZSH_PLUGIN_DIR="$ZSH/plugins"
+source $ZSH/plugin-mgm.sh
+
+typeset -A PLUGINS
+PLUGINS[fast-syntax-highlighting]="git@github.com:zdharma-zmirror/fast-syntax-highlighting.git"
+PLUGINS[zsh-autosuggestions]="git@github.com:zsh-users/zsh-autosuggestions.git"
+PLUGINS[zsh-you-should-use]="git@github.com:MichaelAquilina/zsh-you-should-use.git"
+PLUGINS[zsh-bat]="https://github.com/fdellwing/zsh-bat.git"
+PLUGINS[zsh-completions]="git@github.com:zsh-users/zsh-completions.git"
+
+_plugins_load() {
+  source $ZSH/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+  source $ZSH/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+  source $ZSH/plugins/zsh-you-should-use/you-should-use.plugin.zsh
+  source $ZSH/plugins/zsh-bat/zsh-bat.plugin.zsh
+  fpath=($ZSH/plugins/zsh-completions/src $fpath)
+
+  ## Autocompletion
+  autoload -Uz +X compinit && compinit
+  ## case insensitive path-completion
+  zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+  zstyle ':completion:*' menu select
+}
+
+_plugins_load
+
+export PATH="$PATH:/Applications/WezTerm.app/Contents/MacOS"
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
+
+export PATH="/Applications/Sublime Text.app/Contents/SharedSupport/bin:$PATH"
+
+eval "$(starship init zsh)"
+eval "$(zoxide init zsh --cmd cd)"
+source <(fzf --zsh)
+
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
+
+## Aliases
+
+### Aliases for eza
+alias ls="eza --icons"
+alias ll="eza -lg --icons"
+alias la="eza -lga --icons"
+alias lt="eza -lTg --icons"
+alias lt1="eza -lTg --level=1 --icons"
+alias lt2="eza -lTg --level=2 --icons"
+alias lt3="eza -lTg --level=3 --icons"
+alias lta="eza -lTag --icons"
+alias lta1="eza -lTag --level=1 --icons"
+alias lta2="eza -lTag --level=2 --icons"
+alias lta3="eza -lTag --level=3 --icons"
+
+### Aliases for git
+alias g="git"
+alias ga="git add"
+alias gaa="git add --all"
+alias gapa="git add --patch"
+alias gau="git add --update"
+alias gc="git commit -v"
+alias gca="git commit -v -a"
+alias gcb="git checkout -b"
+alias gco="git checkout"
+alias gcm="git checkout main"
+alias gd="git diff"
+alias gl="git pull"
+alias gp="git push"
+alias gpf="git push --force"
+alias gst="git status"
+alias gss="git status -s"
+
+# direnv
+
+eval "$(direnv hook zsh)"
