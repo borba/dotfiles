@@ -17,3 +17,6 @@ projectile-bookmarks.eld
 *.cache
 lazy-lock.json
 package-lock.json
+
+# Homebrew
+Brewfile.lock.json

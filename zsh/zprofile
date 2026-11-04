@@ -1,0 +1,16 @@
+# Shells de login: ambiente base. Roda antes do zshrc.
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+export PNPM_HOME="$HOME/Library/pnpm"
+
+# (N/) ignora o que não existir nesta máquina
+typeset -U path
+path=(
+  $HOME/.local/bin(N/)
+  $PNPM_HOME(N/)
+  /opt/homebrew/share/google-cloud-sdk/bin(N/)
+  "/Applications/Sublime Text.app/Contents/SharedSupport/bin"(N/)
+  $path
+  /Applications/WezTerm.app/Contents/MacOS(N/)
+)

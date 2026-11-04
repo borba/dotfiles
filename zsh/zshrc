@@ -1,69 +1,83 @@
-export ZSH=~/.zsh
+# Compartilhado entre as máquinas. O que é de uma máquina só fica em ~/.zshrc-local.
 
+## Ambiente base (shells que não são de login não leem o .zprofile)
+[[ -n $HOMEBREW_PREFIX ]] || source ~/.zprofile
+typeset -U path fpath
+fpath=(/opt/homebrew/share/zsh/site-functions(N/) $fpath)
+
+## Histórico
 export HISTFILE=$HOME/.zsh_history
 export HISTSIZE=10000
 export SAVEHIST=10000
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_FIND_NO_DUPS
+setopt HIST_IGNORE_SPACE   # comando com espaço na frente não é gravado
+setopt EXTENDED_HISTORY
 setopt SHARE_HISTORY
 
 autoload -U history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
 bindkey "^[[A" history-beginning-search-backward-end
-bindkey "^[[B" history-beginning-search-forward-end 
+bindkey "^[[B" history-beginning-search-forward-end
 
-## Plugins
-export ZSH_PLUGIN_DIR="$ZSH/plugins"
-source $ZSH/plugin-funcs.sh
+## Completion
+source ~/.zsh/plugin-funcs.sh
+plugin zsh-users/zsh-completions
 
-typeset -A PLUGINS
-PLUGINS[fast-syntax-highlighting]="git@github.com:zdharma-zmirror/fast-syntax-highlighting.git"
-PLUGINS[zsh-autosuggestions]="git@github.com:zsh-users/zsh-autosuggestions.git"
-PLUGINS[zsh-you-should-use]="git@github.com:MichaelAquilina/zsh-you-should-use.git"
-PLUGINS[zsh-completions]="git@github.com:zsh-users/zsh-completions.git"
+autoload -Uz compinit && compinit
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
-_plugins_load() {
-  source $ZSH_PLUGIN_DIR/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-  source $ZSH_PLUGIN_DIR/zsh-autosuggestions/zsh-autosuggestions.zsh
-  source $ZSH_PLUGIN_DIR/zsh-you-should-use/you-should-use.plugin.zsh
-  fpath=($ZSH_PLUGIN_DIR/zsh-completions/src $fpath)
-
-  ## Autocompletion
-  autoload -Uz +X compinit && compinit
-  ## case insensitive path-completion
-  zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+## Ferramentas
+# A ordem importa: fzf-tab antes do fzf, para Tab e **<Tab> funcionarem juntos.
+if (( $+commands[fzf] )); then
+  zstyle ':completion:*' menu no
+  plugin Aloxaf/fzf-tab
+  source <(fzf --zsh)
+else
   zstyle ':completion:*' menu select
-}
-
-if [[ -f $ZSH_PLUGIN_DIR/INSTALLED ]]; then
-  _plugins_load
 fi
 
-export PATH="$PATH:/Applications/WezTerm.app/Contents/MacOS"
+if (( $+commands[fd] )); then
+  export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
+  export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
+  export FZF_ALT_C_COMMAND='fd --type d --hidden --exclude .git'
+fi
 
-eval "$(/opt/homebrew/bin/brew shellenv)"
-eval "$(starship init zsh)"
-#eval "$(zoxide init zsh --cmd cd)"
-#source <(fzf --zsh)
-#eval "$(direnv hook zsh)"
+(( $+commands[zoxide] )) && eval "$(zoxide init zsh)"
+(( $+commands[starship] )) && eval "$(starship init zsh)"
+
+## Java
+# jdk lista as versões instaladas; jdk 11 troca a versão neste shell.
+jdk() {
+  if [[ -z $1 ]]; then
+    /usr/libexec/java_home -V
+    return
+  fi
+  local home
+  home=$(/usr/libexec/java_home --failfast -v "$1") || return
+  export JAVA_HOME=$home
+  java -version
+}
 
 ## Aliases
 
-### Aliases for eza
-alias ls="eza --icons=auto"
-alias ll="eza -lg --icons=auto"
-alias la="eza -lga --icons=auto"
-alias lt="eza -lTg --icons=auto"
-alias lt1="eza -lTg --level=1 --icons=auto"
-alias lt2="eza -lTg --level=2 --icons=auto"
-alias lt3="eza -lTg --level=3 --icons=auto"
-alias lta="eza -lTag --icons=auto"
-alias lta1="eza -lTag --level=1 --icons=auto"
-alias lta2="eza -lTag --level=2 --icons=auto"
-alias lta3="eza -lTag --level=3 --icons=auto"
+### eza
+if (( $+commands[eza] )); then
+  alias ls="eza --icons=auto"
+  alias ll="eza -lg --icons=auto"
+  alias la="eza -lga --icons=auto"
+  alias lt="eza -lTg --icons=auto"
+  alias lt1="eza -lTg --level=1 --icons=auto"
+  alias lt2="eza -lTg --level=2 --icons=auto"
+  alias lt3="eza -lTg --level=3 --icons=auto"
+  alias lta="eza -lTag --icons=auto"
+  alias lta1="eza -lTag --level=1 --icons=auto"
+  alias lta2="eza -lTag --level=2 --icons=auto"
+  alias lta3="eza -lTag --level=3 --icons=auto"
+fi
 
-### Aliases for git
+### git
 alias g="git"
 alias ga="git add"
 alias gaa="git add --all"
@@ -78,10 +92,14 @@ alias gd="git diff"
 alias gdd="git -c diff.external='difft --display=inline' diff"
 alias gl="git pull"
 alias gp="git push"
-alias gpf="git push --force"
+alias gpf="git push --force-with-lease"
 alias gst="git status"
 alias gss="git status -s"
 
-if [[ -f ~/.zshrc-local ]]; then
-  source ~/.zshrc-local
-fi
+## Plugins que envolvem widgets: por último, com o syntax highlighting no fim
+plugin zsh-users/zsh-autosuggestions \
+       MichaelAquilina/zsh-you-should-use \
+       zdharma-continuum/fast-syntax-highlighting
+
+## Local da máquina
+[[ -f ~/.zshrc-local ]] && source ~/.zshrc-local
