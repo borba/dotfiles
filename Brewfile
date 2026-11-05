@@ -3,19 +3,28 @@
 # Não use `brew bundle cleanup`: ele pode tratar como sobra o que não estiver na lista.
 
 brew "bat"
+brew "clojure"
 brew "difftastic"
 brew "eza"
 brew "fd"
 brew "fzf"
 brew "gh"
+brew "glow"
+brew "jq"
 brew "just"
+brew "leiningen"
+brew "mole"
 brew "neovim"
+brew "node" # o pnpm do brew não traz o node
+brew "pnpm"
 brew "ripgrep"
+brew "rtk"
 brew "starship"
 brew "tlrc"
 brew "uv"
 brew "zoxide"
 
+cask "caffeine"
 cask "font-jetbrains-mono-nerd-font"
 cask "wezterm"
 
