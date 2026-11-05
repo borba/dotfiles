@@ -2,6 +2,8 @@
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
+export EDITOR=nvim
+export VISUAL=nvim
 export PNPM_HOME="$HOME/Library/pnpm"
 
 # (N/) ignora o que não existir nesta máquina

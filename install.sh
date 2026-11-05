@@ -42,13 +42,7 @@ link zsh/zshrc             "$HOME/.zshrc"
 link zsh/zprofile          "$HOME/.zprofile"
 link zsh/plugin-funcs.sh   "$HOME/.zsh/plugin-funcs.sh"
 link starship/starship.toml "$HOME/.config/starship.toml"
-
-# Cada máquina pode usar um config de nvim diferente: só liga se não houver nenhum.
-if [[ -e "$HOME/.config/nvim" ]]; then
-  print "mantido   $HOME/.config/nvim"
-else
-  link lazyvim "$HOME/.config/nvim"
-fi
+link nvim                  "$HOME/.config/nvim"
 
 if [[ ! -e "$HOME/.zshrc-local" ]]; then
   run touch "$HOME/.zshrc-local"
