@@ -60,6 +60,41 @@ jdk() {
   java -version
 }
 
+## Repositórios de terceiros
+# oss <url> clona em ~/oss com --depth 1 e entra na pasta. Aceita dono/repo.
+# --full traz o histórico completo; --fork cria seu fork para contribuir.
+oss() {
+  local mode=shallow
+  case $1 in
+    --full) mode=full; shift ;;
+    --fork) mode=fork; shift ;;
+  esac
+  if [[ -z $1 ]]; then
+    print -u2 "uso: oss [--full|--fork] <url|dono/repo>"
+    return 1
+  fi
+
+  local url=${1%/}
+  [[ $url == */* && $url != *:* ]] && url="https://github.com/$url"
+  local name=${url:t}
+  name=${name%.git}
+  local dest="$HOME/oss/$name"
+
+  if [[ -e $dest ]]; then
+    print "já existe: $dest"
+    cd "$dest"
+    return
+  fi
+
+  mkdir -p "$HOME/oss"
+  case $mode in
+    shallow) git clone --depth 1 "$url" "$dest" ;;
+    full)    git clone "$url" "$dest" ;;
+    fork)    (cd "$HOME/oss" && gh repo fork "$url" --clone) ;;
+  esac || return
+  cd "$dest"
+}
+
 ## Aliases
 
 ### eza
