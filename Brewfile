@@ -15,6 +15,7 @@ brew "uv"
 brew "zoxide"
 
 cask "font-jetbrains-mono-nerd-font"
+cask "wezterm"
 
 # JDKs variam por máquina: em ~/.Brewfile.local, use por exemplo cask "temurin@21"
 

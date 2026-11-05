@@ -43,6 +43,7 @@ link zsh/zprofile          "$HOME/.zprofile"
 link zsh/plugin-funcs.sh   "$HOME/.zsh/plugin-funcs.sh"
 link starship/starship.toml "$HOME/.config/starship.toml"
 link nvim                  "$HOME/.config/nvim"
+link wezterm/wezterm.lua   "$HOME/.wezterm.lua"
 
 if [[ ! -e "$HOME/.zshrc-local" ]]; then
   run touch "$HOME/.zshrc-local"
