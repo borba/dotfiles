@@ -97,6 +97,10 @@ oss() {
 
 ## Aliases
 
+### editor
+alias vi="nvim"
+alias vim="nvim"
+
 ### eza
 if (( $+commands[eza] )); then
   alias ls="eza --icons=auto"

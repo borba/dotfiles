@@ -44,11 +44,17 @@ link zsh/plugin-funcs.sh   "$HOME/.zsh/plugin-funcs.sh"
 link starship/starship.toml "$HOME/.config/starship.toml"
 link nvim                  "$HOME/.config/nvim"
 link wezterm/wezterm.lua   "$HOME/.wezterm.lua"
+link git/gitconfig         "$HOME/.gitconfig"
+link git/ignore            "$HOME/.config/git/ignore"
 
 if [[ ! -e "$HOME/.zshrc-local" ]]; then
   run touch "$HOME/.zshrc-local"
 fi
 run chmod 600 "$HOME/.zshrc-local"
+
+if [[ ! -e "$HOME/.gitconfig-local" ]]; then
+  run touch "$HOME/.gitconfig-local"
+fi
 
 print "\nPronto. Para instalar as ferramentas: brew bundle --file=$REPO/Brewfile"
 if [[ -d "$BACKUP" ]]; then

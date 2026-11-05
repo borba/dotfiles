@@ -33,11 +33,11 @@ Configuração compartilhada entre as minhas máquinas (macOS, Apple Silicon).
 
 5. Leve do backup para o `~/.zshrc-local` o que for desta máquina, e coloque ali os segredos dela.
 
-6. Configure o git, que não faz parte deste repositório:
+6. Defina nome e e-mail do git para esta máquina:
 
    ```bash
-   git config --global user.name "Seu Nome"
-   git config --global user.email "voce@exemplo.com"
+   git config --file ~/.gitconfig-local user.name "Seu Nome"
+   git config --file ~/.gitconfig-local user.email "voce@exemplo.com"
    ```
 
 7. Abra o WezTerm e rode `nvim` uma vez. Os plugins do zsh e do Neovim se instalam sozinhos.
@@ -54,6 +54,7 @@ brew bundle --file=Brewfile
 
 - `~/.zshrc-local`: segredos e tudo o que for de uma máquina só.
 - `~/.Brewfile.local`: pacotes de uma máquina só.
+- `~/.gitconfig-local`: nome, e-mail e outros ajustes do git de uma máquina só.
 
 ## Plugins do zsh
 

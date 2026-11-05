@@ -1,0 +1,12 @@
+# Compartilhado entre as máquinas. Nome, e-mail e o que for de uma máquina só
+# ficam em ~/.gitconfig-local.
+
+[init]
+	defaultBranch = main
+[push]
+	autoSetupRemote = true
+[diff]
+	external = difft
+
+[include]
+	path = ~/.gitconfig-local
