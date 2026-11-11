@@ -5,6 +5,9 @@
 typeset -U path fpath
 fpath=(/opt/homebrew/share/zsh/site-functions(N/) $fpath)
 
+# Teclado emacs (^A, ^E...). Sem isso o zsh entra em modo vi porque o EDITOR é nvim.
+bindkey -e
+
 ## Histórico
 export HISTFILE=$HOME/.zsh_history
 export HISTSIZE=10000
