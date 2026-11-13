@@ -1,0 +1,43 @@
+#!/usr/bin/env zsh
+# Rotina da manhã: VPN, credenciais e brew.
+# Uso: bom-dia            roda tudo
+#      bom-dia aws gcloud roda só os passos citados
+# Passos: brew vpn aws staging production gcloud
+
+typeset -a STEPS=(brew vpn aws staging production gcloud)
+typeset -a failed=()
+
+step_vpn() {
+  # Abrir o fauna faz o Twingate pedir autorização no app.
+  open "https://fauna.production.180s.com.br/"
+  open "https://fauna.staging.180s.com.br/"
+}
+step_aws()        { i80 aws creds-refresh }
+step_staging()    { i80 credentials login.clj --env staging }
+step_production() { i80 credentials login.clj --env production }
+step_gcloud()     { gcloud auth login }
+step_brew()       { brew update && brew upgrade --yes }
+
+run() {
+  print -P "\n%F{cyan}%B==> $1%b%f"
+  if ! "step_$1"; then
+    print -P "%F{red}✗ $1 falhou%f"
+    failed+=("$1")
+  fi
+}
+
+selected=(${@:-$STEPS})
+for s in $selected; do
+  if (( ! ${STEPS[(Ie)$s]} )); then
+    print -P "%F{red}passo desconhecido: $s%f (válidos: $STEPS)"
+    exit 2
+  fi
+done
+
+for s in $selected; do run "$s"; done
+
+if (( ${#failed} )); then
+  print -P "\n%F{red}%BFalharam: $failed%b%f  (rode de novo: bom-dia $failed)"
+  exit 1
+fi
+print -P "\n%F{green}%B☀️  Bom dia! Tudo pronto.%b%f"

@@ -50,8 +50,20 @@ git pull
 brew bundle --file=Brewfile
 ```
 
+## Comandos de uma máquina só
+
+Ficam em `machines/<nome>/bin`. Para ativar numa máquina, grave o nome e rode o install, que liga os comandos em `~/.local/bin`:
+
+```bash
+echo 180 > ~/.dotfiles-machine
+./install.sh
+```
+
+- `180`: `bom-dia` roda a rotina da manhã (brew, VPN, credenciais AWS/i80 e gcloud). `bom-dia gcloud` roda só um passo.
+
 ## O que fica fora do git
 
+- `~/.dotfiles-machine`: nome da máquina em `machines/`.
 - `~/.zshrc-local`: segredos e tudo o que for de uma máquina só.
 - `~/.Brewfile.local`: pacotes de uma máquina só.
 - `~/.gitconfig-local`: nome, e-mail e outros ajustes do git de uma máquina só.

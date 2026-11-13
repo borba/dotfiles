@@ -47,6 +47,17 @@ link wezterm/wezterm.lua   "$HOME/.wezterm.lua"
 link git/gitconfig         "$HOME/.gitconfig"
 link git/ignore            "$HOME/.config/git/ignore"
 
+# Comandos de uma máquina só: machines/<nome>/bin, com o nome em ~/.dotfiles-machine.
+if [[ -f "$HOME/.dotfiles-machine" ]]; then
+  machine="$(<"$HOME/.dotfiles-machine")"
+  if [[ ! -d "$REPO/machines/$machine" ]]; then
+    print "aviso     ~/.dotfiles-machine diz '$machine', mas não existe machines/$machine"
+  fi
+  for bin in "$REPO/machines/$machine/bin/"*(N); do
+    link "machines/$machine/bin/${bin:t}" "$HOME/.local/bin/${bin:t}"
+  done
+fi
+
 if [[ ! -e "$HOME/.zshrc-local" ]]; then
   run touch "$HOME/.zshrc-local"
 fi
